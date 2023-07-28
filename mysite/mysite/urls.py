@@ -29,33 +29,6 @@ urlpatterns = [
 
     # My Applications
     path('ads/', include(ads.urls)),
-
-    # # Sample applications
-    # path('hello/', include('hello.urls')),
-    # path('users/', include('users.urls')),
-    # path('tracks/', include('tracks.urls')),
-    # path('views/', include('views.urls')),
-    # path('route/', include('route.urls', namespace='nsroute')),
-    # path('tmpl/', include('tmpl.urls')),
-    # path('gview/', include('gview.urls')),
-    # path('session/', include('session.urls')),
-    # path('authz/', include('authz.urls')),
-    # path('getpost/', include('getpost.urls')),
-    # path('form/', include('form.urls')),
-    # path('crispy/', include('crispy.urls')),
-    # path('myarts/', include('myarts.urls')),
-    # path('menu/', include('menu.urls')),
-    # path('forums/', include('forums.urls')),
-    # path('pics/', include('pics.urls')),
-    # path('favs/', include('favs.urls')),
-    # path('favsql/', include('favsql.urls')),
-    # path('rest/', include('rest.urls')),
-    # path('autos/', include('autos.urls')),
-    # path('usermodel/', include('usermodel.urls')),
-    # path('chat/', include('chat.urls')),
-    # path('util/', include('util.urls')),
-    # path('well/', include('well.urls')),
-    # path('tagme/', include('tagme.urls')),
 ]
 
 # Serve the static HTML

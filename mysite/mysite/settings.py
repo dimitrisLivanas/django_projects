@@ -50,37 +50,6 @@ INSTALLED_APPS = [
 
     # My Applications
     'ads.apps.AdsConfig',
-
-    # # Sample Applications - don't copy
-    # 'hello.apps.HelloConfig',
-    # 'users.apps.UsersConfig',
-    # 'bookone.apps.BookoneConfig',
-    # 'bookmany.apps.BookmanyConfig',
-    # 'tracks.apps.TracksConfig',
-    # 'views.apps.ViewsConfig',
-    # 'tmpl.apps.TmplConfig',
-    # 'gview.apps.GviewConfig',
-    # 'route.apps.RouteConfig',
-    # 'session.apps.SessionConfig',
-    # 'authz.apps.AuthzConfig',
-    # 'getpost.apps.GetpostConfig',
-    # 'form.apps.FormConfig',
-    # 'many.apps.ManyConfig',
-    # 'myarts.apps.MyartsConfig',
-    # 'menu.apps.MenuConfig',
-    # 'forums.apps.ForumsConfig',
-    # 'crispy.apps.CrispyConfig',
-    # 'pics.apps.PicsConfig',
-    # 'rest.apps.RestConfig',
-    # 'favs.apps.FavsConfig',
-    # 'favsql.apps.FavsqlConfig',
-    # 'autos.apps.AutosConfig',
-    # 'cats.apps.CatsConfig',
-    # 'usermodel.apps.UsermodelConfig',
-    # 'chat.apps.ChatConfig',
-    # 'util.apps.UtilConfig',
-    # 'well.apps.WellConfig',
-    # 'tagme.apps.TagmeConfig',
 ]
 
 # When we get to crispy forms :)
