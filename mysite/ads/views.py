@@ -15,12 +15,13 @@ class AdCreateView(OwnerCreateView):
     model = Ad
     # List the fields to copy from the Ad model to the Ad form
     fields = ['title', 'text']
+    fields_exclude = ['owner', 'created_at', 'updated_at']
 
 class AdUpdateView(OwnerUpdateView):
     model = Ad
     fields = ['title', 'text']
     # This would make more sense
-    # fields_exclude = ['owner', 'created_at', 'updated_at']
+    fields_exclude = ['owner', 'created_at', 'updated_at']
 
 
 class AdDeleteView(OwnerDeleteView):
