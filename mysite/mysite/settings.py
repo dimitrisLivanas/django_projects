@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',  
 
     # My Applications
-    'ads.apps.AppsConfig',
+    'ads.apps.AdsConfig',
 
     # # Sample Applications - don't copy
     # 'hello.apps.HelloConfig',
