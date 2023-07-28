@@ -28,7 +28,7 @@ urlpatterns = [
     re_path(r'^oauth/', include('social_django.urls', namespace='social')),  # Keep
 
     # My Applications
-    path('ads/', include(ads.urls)),
+    path('ads/', include('ads.urls')),
 ]
 
 # Serve the static HTML

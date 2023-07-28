@@ -1,11 +1,11 @@
-from myarts.models import Ad
-from myarts.owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
+from ads.models import Ad
+from ads.owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
 
 
 class AdListView(OwnerListView):
     model = Ad
     # By convention:
-    # template_name = "myarts/ad_list.html"
+    # template_name = "ads/ad_list.html"
 
 
 class AdDetailView(OwnerDetailView):
