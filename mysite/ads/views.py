@@ -14,7 +14,7 @@ class AdDetailView(OwnerDetailView):
 class AdCreateView(OwnerCreateView):
     model = Ad
     # List the fields to copy from the Ad model to the Ad form
-    fields = ['title', 'text']
+    fields = ['title', 'text', 'price']
     fields_exclude = ['owner', 'created_at', 'updated_at']
 
 class AdUpdateView(OwnerUpdateView):

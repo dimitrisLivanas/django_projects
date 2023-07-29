@@ -27,7 +27,7 @@ SECRET_KEY = 'g$iqqu&*mw4_sg3(#ld0sqaalxebel&168^yj%i&sgrw(fmn@w'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-CSRF_TRUSTED_ORIGINS = ['http://*', 'https://*']
+CSRF_TRUSTED_ORIGINS = ['https://3188-2a02-8109-aa40-5490-4839-4130-ec4b-a2eb.ngrok-free.app']
 ALLOWED_HOSTS = ['*']
 CSRF_ALLOWED_ORIGINS = ["https://*"]
 CORS_ORIGINS_WHITELIST = ["https://*"]
