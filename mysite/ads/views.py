@@ -33,22 +33,19 @@ class AdDetailView(OwnerDetailView):
 #     fields_exclude = ['owner', 'created_at', 'updated_at']
 
 class AdCreateView(LoginRequiredMixin, View):
-    model = Ad
-    fields = ['title', 'text', 'picture']
-#   fields_exclude = ['owner', 'created_at', 'updated_at']
     template_name = 'ads/ad_form.html'
     success_url = reverse_lazy('ads:all')
 
     def get(self, request, pk=None):
         form = CreateForm()
-        ctx = {'ad_form': form}
+        ctx = {'form': form}
         return render(request, self.template_name, ctx)
     
     def post(self, request, pk=None):
         form = CreateForm(request.POST, request.FILES or None)
 
         if not form.is_valid():
-            ctx = {'ad_form': form}
+            ctx = {'form': form}
             return render(request, self.template_name, ctx)
         
         #Add owner to the model before saving
@@ -64,7 +61,7 @@ class AdUpdateView(LoginRequiredMixin, View):
     def get(self, request, pk):
         pic = get_object_or_404(Ad, id=pk, owner=self.request.user)
         form = CreateForm(instance=pic)
-        ctx = {'ad_form': form}
+        ctx = {'form': form}
         return render(request, self.template_name, ctx)
 
     def post(self, request, pk=None):
@@ -72,7 +69,7 @@ class AdUpdateView(LoginRequiredMixin, View):
         form = CreateForm(request.POST, request.FILES or None, instance=pic)
 
         if not form.is_valid():
-            ctx = {'ad_form': form}
+            ctx = {'form': form}
             return render(request, self.template_name, ctx)
 
         pic = form.save(commit=False)
