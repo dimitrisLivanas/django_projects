@@ -33,7 +33,10 @@ class AdDetailView(OwnerDetailView):
 #     fields_exclude = ['owner', 'created_at', 'updated_at']
 
 class AdCreateView(LoginRequiredMixin, View):
-    template_name = 'ad_form.html'
+    model = Ad
+    fields = ['title', 'text', 'picture']
+#   fields_exclude = ['owner', 'created_at', 'updated_at']
+    template_name = 'ads/ad_form.html'
     success_url = reverse_lazy('ads:all')
 
     def get(self, request, pk=None):
