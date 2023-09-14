@@ -1,6 +1,6 @@
 from django.views import View
 from django.shortcuts import render, redirect, get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -74,6 +74,22 @@ class AdUpdateView(LoginRequiredMixin, View):
 class AdDeleteView(OwnerDeleteView):
     model = Ad
     template_name = 'ads/ad_confirm_delete.html'
+
+class CommentCreateView(LoginRequiredMixin, View):
+    def post(self, request, pk) :
+        a = get_object_or_404(Ad, id=pk)
+        comment = Comment(text=request.POST['comment'], owner=request.user, ad=a)
+        comment.save()
+        return redirect(reverse('ads:ad_detail', args=[pk]))
+
+class CommentDeleteView(OwnerDeleteView):
+    model = Comment
+    template_name = "ads/comment_delete.html"
+
+    # https://stackoverflow.com/questions/26290415/deleteview-with-a-dynamic-success-url-dependent-on-id
+    def get_success_url(self):
+        ad = self.object.ad
+        return reverse('ads:ad_detail', args=[ad.id])
 
 def stream_file(request, pk):
     pic = get_object_or_404(Ad, id=pk)
