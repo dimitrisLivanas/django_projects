@@ -26,8 +26,6 @@ class AdDetailView(OwnerDetailView):
         context = {'forum' : x, 'comments': comments, 'comment_form': comment_form}
         return render(request, self.template_name, context)
 
-
-
 class AdCreateView(LoginRequiredMixin, View):
     template_name = 'ads/ad_form.html'
     success_url = reverse_lazy('ads:all')
