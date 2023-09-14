@@ -1,7 +1,13 @@
 from django import forms
-from ads.models import Ad
+from ads.models import Ad, Comment
+from django.views import View
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from ads.humanize import naturalsize
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from ads.owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
 
 
 # Create the form class.
@@ -46,6 +52,22 @@ class CreateForm(forms.ModelForm):
         return instance
 class CommentForm(forms.Form):
     comment = forms.CharField(required=True, max_length=500, min_length=3, strip=True)
+
+class CommentCreateView(LoginRequiredMixin, View):
+    def post(self, request, pk) :
+        a = get_object_or_404(Ad, id=pk)
+        comment = Comment(text=request.POST['comment'], owner=request.user, ad=a)
+        comment.save()
+        return redirect(reverse('ads:ad_detail', args=[pk]))
+
+class CommentDeleteView(OwnerDeleteView):
+    model = Comment
+    template_name = "ads/comment_delete.html"
+
+    # https://stackoverflow.com/questions/26290415/deleteview-with-a-dynamic-success-url-dependent-on-id
+    def get_success_url(self):
+        ad = self.object.ad
+        return reverse('ads:ad_detail', args=[ad.id])
 
 # https://docs.djangoproject.com/en/3.0/topics/http/file-uploads/
 # https://stackoverflow.com/questions/2472422/django-file-upload-size-limit
