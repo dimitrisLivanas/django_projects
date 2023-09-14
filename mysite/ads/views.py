@@ -4,8 +4,8 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from ads.models import Ad
-from ads.forms import CreateForm
+from ads.models import Ad, Comment
+from ads.forms import CreateForm, CommentForm
 
 from ads.owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
 
@@ -19,18 +19,14 @@ class AdListView(OwnerListView):
 class AdDetailView(OwnerDetailView):
     model = Ad
     template_name = 'ads/ad_detail.html'
+    def get(self, request, pk) :
+        x = get_object_or_404(Ad, id=pk)
+        comments = Comment.objects.filter(ad=x).order_by('-updated_at')
+        comment_form = CommentForm()
+        context = {'forum' : x, 'comments': comments, 'comment_form': comment_form}
+        return render(request, self.template_name, context)
 
-# class AdCreateView(OwnerCreateView):
-#     model = Ad
-#     # List the fields to copy from the Ad model to the Ad form
-#     fields = ['title', 'text']
-#     fields_exclude = ['owner', 'created_at', 'updated_at']
 
-# class AdUpdateView(OwnerUpdateView):
-#     model = Ad
-#     fields = ['title', 'text']
-#     # This would make more sense
-#     fields_exclude = ['owner', 'created_at', 'updated_at']
 
 class AdCreateView(LoginRequiredMixin, View):
     template_name = 'ads/ad_form.html'
