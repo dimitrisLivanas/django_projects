@@ -51,7 +51,6 @@
   <input type="submit" value="All ads" onclick="window.location.href='{% url 'ads:all' %}';return false;">
   </form>
   </p>
-  {% endif %}
   {% for comment in comments %}
   <p> {{ comment.text }} 
   ({{ comment.updated_at|naturaltime }})
