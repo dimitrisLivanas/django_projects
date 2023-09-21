@@ -4,7 +4,7 @@ from django.urls import reverse_lazy, reverse
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from ads.models import Ad, Comment
+from ads.models import Ad, Comment, Fav
 from ads.forms import CreateForm, CommentForm
 
 from ads.owner import OwnerListView, OwnerDetailView, OwnerCreateView, OwnerUpdateView, OwnerDeleteView
@@ -100,6 +100,35 @@ class CommentDeleteView(OwnerDeleteView):
     def get_success_url(self):
         ad = self.object.ad
         return reverse('ads:ad_detail', args=[ad.id])
+
+# csrf exemption in class based views
+# https://stackoverflow.com/questions/16458166/how-to-disable-djangos-csrf-validation
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.db.utils import IntegrityError
+
+@method_decorator(csrf_exempt, name='dispatch')
+class AddFavoriteView(LoginRequiredMixin, View):
+    def post(self, request, pk) :
+        print("Add PK",pk)
+        t = get_object_or_404(Ad, id=pk)
+        fav = Fav(user=request.user, add=a)
+        try:
+            fav.save() #in case of duplicate key
+        except IntegrityError as e:
+            pass
+        return HttpResponse()
+    
+@method_decorator(csrf_exempt, name='dispatch')
+class DeleteFavoriteView(LoginRequiredMixin, View):
+    def post(self, request, pk) :
+        print("Delete PK",pk)
+        t = get_object_or_404(Ad, id=pk)
+        try:
+            fav = Fav.objects.get(user=request.user, ad=a).delete()
+        except Fav.DoesNotExist as e:
+            pass
+        return HttpResponse()
 
 def stream_file(request, pk):
     pic = get_object_or_404(Ad, id=pk)
